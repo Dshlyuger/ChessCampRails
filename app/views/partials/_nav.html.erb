@@ -1,0 +1,93 @@
+ 
+<% # Our navigation bar for the website%>
+  <div class="contain-to-grid">
+    <nav class="top-bar" data-topbar>
+      <section class="top-bar-section">
+    
+<% # Shows login or logout depending on the user login status%>    
+        <ul class="left " style= "position:absolute; left: -140px; ">
+              <% if logged_in? %>
+    <li><%= link_to "Logout", logout_path %></li>
+    <%else %>
+    <li><%= link_to "Login", login_path %></li>
+    <% end %> 
+     <li><%= link_to "Home", home_path %></li>
+           <!-- options for camps -->
+          <%if(!current_user.nil? && current_user.role=="admin") %>
+          <li class="has-dropdown">
+            <%= link_to "Camps", camps_path %>
+            <ul class="dropdown" >
+              <li ><%= link_to "List Camps", camps_path %></li>
+              <%if(!current_user.nil? && current_user.role=="admin") %>
+
+              <li><%= link_to "Add a Camp", new_camp_path %></li>
+              <% end %>
+            </ul>
+          </li>
+      <% else %>
+      <li><%= link_to "Camps", camps_path %></li>
+      <% end %>
+          <!-- options for curriculums -->
+          <%if(!current_user.nil? && current_user.role=="admin") %>
+          <li class="has-dropdown">
+            <%= link_to "Curriculums", curriculums_path %>
+            <ul class="dropdown">
+              <li><%= link_to "List Curriculums", curriculums_path %></li>
+              <li><%= link_to "Add a Curriculum", new_curriculum_path %></li>
+            </ul>
+          </li>
+          <% end %>
+         
+
+          <!-- options for instructors -->
+        <%if(!current_user.nil? && current_user.role=="admin") %>
+          <li class="has-dropdown">
+            <!-- <a href="#">Instructors</a> -->
+
+            <%= link_to "Instructors", instructors_path %>
+            <ul class="dropdown">
+              <li><%= link_to "List Instructors", instructors_path %></li>
+              <li><%= link_to "Add an Instructor", new_instructor_path %></li>
+            </ul>
+          </li>
+        <% end %>
+
+
+            <!-- options for students -->
+           <%if(!current_user.nil? && current_user.role=="admin") %>
+          <li class="has-dropdown">
+            <!-- <a href="#">Instructors</a> -->
+            <%= link_to "Students", students_path %>
+            <ul class="dropdown">
+              <li><%= link_to "List Students", students_path %></li>
+             
+              <li><%= link_to "Add an Student", new_student_path %></li>
+              <% end %>
+            </ul>
+          </li>
+          <!-- options for locations -->
+           <%if(!current_user.nil? && current_user.role=="admin") %>
+          <li class="has-dropdown">
+            <%= link_to "Locations", locations_path %>
+            <ul class="dropdown">
+              <li><%= link_to "List Locations", locations_path %></li>
+              <li><%= link_to "Add a Location", new_location_path %></li>
+            </ul>
+          </li>
+          <% end %>
+
+        <!-- options for families -->
+      <%if(!current_user.nil? && current_user.role=="admin") %>
+          <li class="has-dropdown">
+            <%= link_to "Families", families_path %>
+            <ul class="dropdown">
+              <li><%= link_to "List Families", families_path %></li>
+              <li><%= link_to "Add a Family", new_family_path %></li>
+            </ul>
+          </li>
+          <% end %>
+
+        </ul>
+      </section>
+    </nav>
+  </div>

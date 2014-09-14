@@ -1,0 +1,53 @@
+<h2 style="text-align:center">Welcome <%=current_user.instructor.first_name %>! </h2>
+
+ <%-# We show instructors their info with the option to edit it-%>
+
+<h3 style= "position:absolute;  top: 120px;">Your Details</h3><br />
+<div style= "position:absolute;  bottom: -325px;">
+<strong>Name:&nbsp;&nbsp;</strong> 
+  <%= @instructor.proper_name %><br /><br />
+
+<strong>Phone:&nbsp;&nbsp;</strong> 
+  <%= number_to_phone(@instructor.phone) %><br /><br />
+
+<strong>Email:&nbsp;&nbsp;</strong> 
+  <%= mail_to @instructor.email, @instructor.email, encode: "javascript" %><br /><br />
+
+
+<strong>Biography</strong><br />
+  <%= @instructor.bio.nil? ? "N/A" : @instructor.bio %><br /><br />
+
+<%= link_to "Edit Profile", edit_instructor_path(current_user.instructor), class: "button tiny radius" %></li>
+
+<%-# We display instructors upcoming camps-%>
+
+</div>
+<div class="small-7 columns" style= "position:absolute; right: -200px; top: 120px;">
+<h3> Your Camps </h3>
+<table class="table">
+  <tr>
+    <th width="260">Name</th>
+    <th width="120">Start On</th>
+    <th width="120">Time</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @upcoming_camps.each do |camp| %>
+  <tr>
+    <td><%= link_to camp.name, camp_path(camp) %></td>
+    <td align="center"><%= camp.start_date.strftime('%m/%d/%y') %></td>
+    <td align="center"><%= camp.time_slot == "am" ? "Morning" : "Afternoon" %></td>
+  </tr>
+<% end %>
+
+</table>
+
+<span class="paginate">
+<%= will_paginate @upcoming_camps, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
+</span>
+
+ </div>
+
+ <div style= "position:absolute;  bottom: -560px; right: 240px;"> <%= image_tag 'chessbanner2.png', class: "left", size: "500x300" %> </div>
+

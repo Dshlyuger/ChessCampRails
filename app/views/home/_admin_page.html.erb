@@ -1,0 +1,91 @@
+<h2 style="text-align:center">Welcome <%=current_user.instructor.first_name %>!</h2>
+
+
+</br>
+<div class="row"  > 
+<div class="small-4 columns" style= "position:absolute;  right: 320px; ">
+
+<%-# Admins see all of the paid registrations-%>
+<h3>Paid Registrations(<%= @total %>)</h3>
+
+<table class="table" >
+  <tr>
+    <th width="200">Associated Camp</th>
+    <th width="200">Associted Student</th>
+    <th width="100">Points_Earned</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @paid.each do |registration| %>
+  <tr>
+    <td><%= link_to registration.camp.name, camp_path(registration.camp) %></td>
+    <td align="center"><%= link_to registration.student.first_name + " " + registration.student.last_name, student_path(registration.student) %></td>
+    <td align="center"><%= registration.points_earned %></td>
+  </tr>
+<% end %>
+</table>
+<span class="paginate">
+<%= will_paginate @paid, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
+</span>
+</div>
+
+<div class="small-4 columns" <div class="small-4 columns" style= "position:absolute;  right: -160px; ">
+<%-# Admins see all of the registrations that have not been paid in full-%>
+<h3>Deposit Only(<%= @deposit_only_total %>)</h3>
+
+<table class="table">
+  <tr>
+    <th width="200">Associated Camp</th>
+    <th width="200">Associted Student</th>
+    <th width="100">Points_Earned</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @deposit_only.each do |registration| %>
+  <tr>
+    <td><%= link_to registration.camp.name, camp_path(registration.camp) %></td>
+    <td align="center"><%= link_to registration.student.first_name + " " + registration.student.last_name, student_path(registration.student) %></td>
+    <td align="center"><%= registration.points_earned %></td>
+  </tr>
+<% end %>
+</table>
+<span class="paginate">
+<%= will_paginate @deposit_only, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
+</span>
+</div>
+
+
+<!-- Add the pagination using will_paginate gem -->
+    
+  </div>
+
+
+  <div class="small-2 columns" style= "position:absolute;  top: 30px; " >
+<%-# Admins see all of the instructors assigned to various camps-%>    
+<h4> Instructor Assignments (<%= @deposit_only_total %>)</h4>
+
+<table class="table">
+  <tr>
+    <th width="200">Camp</th>
+    <th width="200">Instructor</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @instructor_assignments.each do |assignment| %>
+  <tr>
+    <td><%= link_to assignment.camp.name, camp_path(assignment.camp) %></td>
+    <td align="center"><%= link_to assignment.instructor.first_name + " " + assignment.instructor.last_name, 
+    instructor_path(assignment.instructor) %></td>
+  </tr>
+<% end %>
+</table>
+<span class="paginate">
+<%= will_paginate @instructor_assignments, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
+</span>
+</div>
+
+ 
+

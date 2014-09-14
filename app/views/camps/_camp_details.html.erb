@@ -1,0 +1,98 @@
+<%-# We only allow camp actions to admins, we display the camps details-%>
+<h3>Camp Details</h3><br />
+<strong>Name:&nbsp;&nbsp;</strong> 
+  <%= link_to @camp.name, curriculum_path(@camp.curriculum) %><br /><br />
+
+<strong>Cost:&nbsp;&nbsp;</strong> 
+  <%= number_to_currency(@camp.cost) %><br /><br />
+
+<strong>Max Students:&nbsp;&nbsp;</strong> 
+  <%= @camp.max_students %><br /><br />
+
+<strong>Dates:&nbsp;&nbsp;</strong> 
+  <%= @camp.start_date.strftime('%m/%d/%y') %> 
+  <% if @camp.start_date != @camp.end_date %>
+    <%= "- #{@camp.end_date.strftime('%m/%d/%y')}" %>
+  <% end %>
+  <br /><br />
+
+<strong>Time:&nbsp;&nbsp;</strong> 
+  <%= @camp.time_slot == "am" ? "Morning" : "Afternoon" %><br /><br />
+
+<strong>Active?&nbsp;&nbsp;</strong>
+  <%= @camp.active ? "Yes" : "No" %><br /><br />
+
+<%if(current_user.nil?) %>
+<%=link_to 'Back', :back, class: "button tiny radius" %>
+<%=link_to 'View Location', location_path(@camp.location), class: "button tiny radius" %>
+<% end %>
+
+<%-# We also display the instructors for the camp for guests-%>
+<%if(current_user.nil?) %>
+
+ <div class="panel clearfix" style="position:absolute; right: -400px; top: 20px;">
+    <h5>Instructors:</h5>
+    <ul class="side-nav">
+      <% @camp.instructors.each do |instructor| %>
+        <li><%= link_to instructor.first_name + " " + instructor.last_name, instructor_path(instructor) %></li>
+      <% end %>
+    </ul>
+  </div>
+
+<% end %>
+
+
+<%if(!current_user.nil? && current_user.role=="admin") %>
+<%= link_to(new_registration_path(camp_id: @camp.id), class: 'button tiny radius') do %>
+  <i class="fa fa-clipboard"></i>
+  &nbsp;Add New registration
+<% end %>
+<% end %>
+
+<%-# We include the camps registrations on the camp page-%>
+<% unless @camp_registrations.empty? %>
+  <!-- <h3>&nbsp;</h3> -->
+  <h4> Registrations (<%= @camp_registrations.size%>) </h4>
+ <table class="table">
+  <tr>
+    <th width="120">Student </th>
+     <th width="260">Payment Status</th>
+    <th width="120">Points Earned </th>
+    <th width="120">Rating </th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @camp_registrations.each do |registration| %>
+  <tr> 
+    <%if(!current_user.nil?) %>
+    <td><%= link_to registration.student.last_name+", "+ registration.student.first_name, student_path(registration.student) %></td>
+    <% else %>
+    <td><%= registration.student.last_name+", "+ registration.student.first_name %></td>
+    <% end %>
+
+    <td align="center"><%= registration.payment_status %></td>
+    <td align="center"><%= registration.points_earned %></td>
+
+    <td><%= registration.student.rating %></td>
+    <%if(!current_user.nil? && current_user.role=="admin") %>
+    <td><%= link_to 'Destroy', registration, method: :delete, data: { confirm: 'Are you sure?' }, class: "button tiny radius alert" %></td>
+    <% end %> 
+  </tr>
+<% end %>
+</table>
+
+<% else %>
+  <div class="panel clearfix">
+    <h5>No Registrations</h5>
+  </div>
+<% end %>
+
+<%if(!current_user.nil? && current_user.role=="instructor") %>
+<%=link_to 'Back', :back, class: "button tiny radius" %>
+<% end %>
+
+ <%if(!current_user.nil? && current_user.role=="admin") %>
+<%= link_to "Edit this camp", edit_camp_path(@camp), class: "button tiny radius" %>&nbsp;&nbsp;
+<%= link_to 'Destroy camp', camp_path(@camp), data: { confirm: 'Are you sure you want to permanently remove this camp from the system?' }, method: :delete, class: "button tiny radius alert" %>
+<%end%>

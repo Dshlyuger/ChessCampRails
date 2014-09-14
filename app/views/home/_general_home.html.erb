@@ -1,0 +1,39 @@
+<h2 style="text-align:center">Welcome Chess Parents!</h2>
+<%-# Welcome stuff for guests-%>
+<p> The Knight school is a long running chess school based in pittsburgh. We offer a large variety of fun, educational 
+	and well taught chess classes for kids of all ages and ratings. Come take a look at the various camps that are starting up soon. We love chess and love to teach it and we gaurentee that your kid will have a great time and become a better chess player to boot.
+
+</p>
+</br>
+</br>
+
+<%= image_tag 'chess-smarter.jpg', class: "left", width: "500" %>
+
+ <div class="small-7 columns" style= "position:absolute; right: -200px; top: 155px;">
+
+
+
+<table class="table">
+  <tr>
+    <th width="260">Name</th>
+    <th width="120">Start On</th>
+    <th width="120">Time</th>
+    <th></th>
+    <th></th>
+  </tr>
+<%-# We show guests upcoming camps-%>
+<% @upcoming_camps.each do |camp| %>
+  <tr>
+    <td><%= link_to camp.name, camp_path(camp) %></td>
+    <td align="center"><%= camp.start_date.strftime('%m/%d/%y') %></td>
+    <td align="center"><%= camp.time_slot == "am" ? "Morning" : "Afternoon" %></td>
+  </tr>
+<% end %>
+
+</table>
+
+<span class="paginate">
+<%= will_paginate @upcoming_camps, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
+</span>
+
+ </div>

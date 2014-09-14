@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="small-7 columns">
+    <!-- MAIN CONTENT GOES HERE -->
+    <%= render :partial => "camps", locals: { status: "Upcoming", camps: @upcoming_camps } %>
+    <p>&nbsp;</p>
+    <%if(!current_user.nil? && current_user.role=="admin") %>
+    <%= render :partial => "past_camps", locals: { status: "Past", camps: @past_camps } %>
+    <%end%>
+    <br />
+    <%if(!current_user.nil? && current_user.role=="admin") %>
+    <%= link_to "Add a new camp", new_camp_path, class: "button tiny radius" %>
+    <%else %> 
+    <%=link_to 'Back', :back, class: "button tiny radius" %>
+    <%end%>
+  </div>
+
+  <div class="small-1 columns">
+    &nbsp;
+  </div>
+
+  <div class="small-4 columns">
+    <!-- SIDEBAR CONTENT GOES HERE -->
+    <%if(!current_user.nil? && current_user.role=="admin") %>
+    <%= render :partial => "inactive_camps" %>
+    <%end%>
+  </div>
+</div>

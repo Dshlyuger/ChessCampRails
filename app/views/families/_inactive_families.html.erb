@@ -1,0 +1,11 @@
+<% unless @inactive_families.empty? %>
+  <h3>&nbsp;</h3>
+  <div class="panel clearfix">
+    <h5>Inactive Families</h5>
+    <ul class="side-nav">
+      <% @inactive_families.each do |family| %>
+        <li><%= link_to family.family_name, family_path(family) %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -1,0 +1,36 @@
+<h3>Family Details</h3><br />
+<strong>Family Name:&nbsp;&nbsp;</strong> 
+  <%= @family.family_name %><br /><br />
+
+<strong>Parent:&nbsp;&nbsp;</strong> 
+  <%= @family.parent_first_name %><br /><br />
+
+<strong>Email:&nbsp;&nbsp;</strong> 
+  <%= @family.email%><br /><br />
+
+<strong>Phone:&nbsp;&nbsp;</strong> 
+  <%= number_to_phone @family.phone  %><br /><br />
+
+<strong>Active?:&nbsp;&nbsp;</strong> 
+ <%= @family.active ? "Yes" : "No" %><br /><br />
+
+ <% unless @students.empty? %>
+  <!-- <h3>&nbsp;</h3> -->
+  <div class="panel clearfix">
+    <h5>Students in family:</h5>
+    <ul class="side-nav">
+      <% @students.each do |student| %>
+        <li><%= link_to "#{student.name}", student_path(student) %></li>
+      <% end %>
+    </ul>
+  </div>
+
+<% else %>
+  <div class="panel clearfix">
+    <h5>Curriculum has not been used</h5>
+  </div>
+<% end %>
+
+
+<%= link_to "Edit this family", edit_family_path(@family), class: "button tiny radius" %>&nbsp;&nbsp;
+<%= link_to 'Destroy family', family_path(@family), data: { confirm: 'Are you sure you want to permanently remove this family from the system?' }, method: :delete, class: "button tiny radius alert" %>

@@ -1,0 +1,25 @@
+<% # nested form includes both instructor and the user which we fill out at the same time %>
+<%= simple_nested_form_for @instructor, :html => { :class => 'form-horizontal' }, :html => { :multipart => true }  do |instructor_form| %>
+    <div class="row">
+      <div class="span7">
+        <fieldset>
+          <h3><%= controller.action_name.capitalize %> Instructor</h3>
+          <%= render :partial => "instructor_fields", :locals => { :f => instructor_form } %>
+        </fieldset>
+      </div>      
+      <hr class="style-one" ><br>
+    <div class="span5">
+      <h3>User for this Instructor</h3>
+        <div id="instructor_user">
+
+          <%= instructor_form.simple_fields_for :user  do |user_form| %>
+          <%= render :partial => "user_fields", :locals => { :f => user_form } %>
+        <% end %> 
+      </div> 
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= instructor_form.submit nil, :class => 'button radius' %>
+    <%= link_to 'Cancel', instructors_path, :class => 'button secondary' %>
+  </div>
+<% end %>

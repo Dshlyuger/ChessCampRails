@@ -1,0 +1,11 @@
+<% if !current_user.nil? && current_user.role=="instructor" %>
+	<%= render :partial => 'personal_home' %>
+
+<% elsif !current_user.nil? && current_user.role=="admin" %>
+<%= render :partial => 'admin_page' %>
+
+<% else %>
+	<%= render :partial => 'general_home' %>
+<% end %>
+
+

@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+
+<h3>Student Details</h3><br />
+<strong>Name:&nbsp;&nbsp;</strong> 
+  <%= @student.first_name+ " " + @student.last_name %><br /><br />
+
+<strong>Date Of Birth:&nbsp;&nbsp;</strong> 
+  <%= @student.date_of_birth.strftime("%m/%d/%Y") %><br /><br />
+
+<strong>Age:&nbsp;&nbsp;</strong> 
+  <%= @student.age %><br /><br />
+
+<strong>Rating:&nbsp;&nbsp;</strong> 
+  <%= if(@student.rating==0) then "Unrated" else @student.rating end %><br /><br />
+
+ <strong>Active?:&nbsp;&nbsp;</strong> 
+ <%= @student.active ? "Yes" : "No" %><br /><br />
+
+ <% unless @student_camps.empty? || current_user.nil? || current_user.role=="instructor" %>
+  <!-- <h3>&nbsp;</h3> -->
+  <h3>  Student Registrations</h3>
+ <table class="table">
+  <tr>
+    <th width="260">Name</th>
+    <th width="120">Start Date </th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @student_camps.each do |camp| %>
+  <tr>
+    <td><%= link_to camp.name %></td>
+    <td align="center"><%= camp.start_date.strftime("%m/%d/%y") %></td>
+    <td><%= link_to 'Edit', edit_camp_path(camp), class: "button tiny radius" %></td>
+  </tr>
+<% end %>
+</table>
+
+<% else %>
+ <%if(!current_user.nil? && current_user.role=="admin") %>
+  <div class="panel clearfix">
+
+    <h5>Student is not registered for any camps</h5>
+  </div>
+  <% end %>
+<% end %>
+
+
+
+
+ <%if(!current_user.nil? && current_user.role=="admin") %>
+<%= link_to "Edit this student", edit_student_path(@student), class: "button tiny radius" %>&nbsp;&nbsp;
+<%= link_to 'Destroy location', student_path(@student), data: { confirm: 'Are you sure you want to permanently remove this instructor from the system?' }, method: :delete, class: "button tiny radius alert" %>
+<%else %> 
+    <%=link_to 'Back', :back, class: "button tiny radius" %>
+<% end %>
+
+

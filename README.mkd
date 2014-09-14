@@ -1,0 +1,6 @@
+## T.A PLEASE READ ##
+
+Cucumeber tests fail because of random geocoding errors when run as a bundle sometimes but indivudally it passes, talked to professor heimann on  May 6th 11th about this.
+Please check it individually if this issue arises from these or other cucumber tests(weird geocoding errors when  running as a bundle sometimes).
+
+Unit tests also act strangeley sometimes, they are inconcsisent, returning the right test coverage (in the 97-98 percent area) and sometimes claiming to be 97 % covered but in the output showing 81 percent and a lot of code that is from the previous phase as not covered(Despite all the tests supposedley passing). Please try it a few times if this happens because it really does seem random and gives very different results.
