@@ -215,14 +215,14 @@ namespace :db do
     all_locations = [cmu, north, sqhill, acac]
 
     # Step 4: Create some camps and assign to instructors
-    dates = [[Date.new(2014,6,16),Date.new(2014,6,20)],
-             [Date.new(2014,6,23),Date.new(2014,6,27)],
-             [Date.new(2014,7,7),Date.new(2014,7,11)],
-             [Date.new(2014,7,21),Date.new(2014,7,25)],
-             [Date.new(2014,7,28),Date.new(2014,8,1)],
-             [Date.new(2014,8,4),Date.new(2014,8,8)],
-             [Date.new(2014,8,11),Date.new(2014,8,15)],
-             [Date.new(2014,8,18),Date.new(2014,8,22)]]
+    dates = [[Date.new(2017,10,16),Date.new(2017,10,20)],
+             [Date.new(2017,9,23),Date.new(2017,11,27)],
+             [Date.new(2017,7,7),Date.new(2017,7,11)],
+             [Date.new(2017,7,21),Date.new(2017,7,25)],
+             [Date.new(2017,7,28),Date.new(2017,8,1)],
+             [Date.new(2017,8,4),Date.new(2017,8,8)],
+             [Date.new(2017,8,11),Date.new(2017,8,15)],
+             [Date.new(2017,8,18),Date.new(2017,8,22)]]
 
     dates.each do |starting, ending|
       ["am","pm"].each do |slot|

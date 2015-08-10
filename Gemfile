@@ -62,6 +62,8 @@ gem 'carrierwave'
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '3.1.5'
 
+gem 'nokogiri'
+
 # Additional gems that are very useful in Rails development
 group :development do
   gem 'quiet_assets'
