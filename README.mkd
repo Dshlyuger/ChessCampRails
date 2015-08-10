@@ -1,18 +1,16 @@
 This is my final project for the class Application Design And Development. Pictures of the site in action can be seen below, and instructions on how to quickly have it running locally can be found towards the bottom of this readme.
 
-It is a website that is designed for use by a fictional chess camp administrator as well as instructors he
-employs and curious visitors who are interested in the camp. 
+The rails app is a website that is designed for use by a fictional chess camp administrator, as well as instructors he employs. It gives the admin and chess camp instructors the various tools they need to smoothly manage all aspects of a chess camp. The website also allows prospective customers to see specific information and get an introduction to the chess camp, although they are barred from seeing much of the internals that the admin/instructors use to manage the camp.
 
-For the administrator it allows him to add and keep track of all the various camps he's running and their various curriculums as well as all the instructors and
-students of camps as well as camp locations and all of the various relationships among these and other entities.
-It also includes a bevy of validations to ensure that all of the data that is inputted and maintained makes sense(such as newly created camps not starting in the past)
-and many other features that enable the whole process such as instructor profiles, geolocation for particular locations, and things like multi model forms which make it easy to add related entities.
+For example, the app enables the administrator to add and keep track of all the various camps he's running and their various curriculums, as well as all the instructors who are teaching these camps. In addition, the administrator can easily view which specific students are in each of these camp sessions, their payment status's, the camp locations they go to(google maps integrated) and all of the various relationships among these and other entities such as registrations and particular families who are signing up multiple kids.
+The app also includes a bevy of validations to ensure that all of the data that is inputted and maintained makes sense(such as newly created camps not starting in the past)
+and many other features that enable the whole process, such as instructor profiles, geolocation for particular locations, and things like multi model forms which make it easy to add related entities.
 
-The site includes different views  and  functionality for different users who have varying levels of access in particular, visitors, instructors, and administrators.
+The site includes different views  and  functionality for different users who have varying levels of access in particular, visitors, instructors, and administrators and implements this tiered access useing the ruby cancan gem.
 
 All functionality is extensively unit tested and cucumber tests are also included that validate the presence of certain functionality(although I did not personally write the cucumber tests, those were provided by the professor).
 
-To see the site in action pull the repo and run rake db:migrate followed by rake db:populate(this assumes you have ruby and rails installed if not just google an installation as it is very easy to download a package that gets you all of the components you need quickly)
+To see the site in action pull the repo and run bundle install, followed by rake db:migrate and rake db:populate(this assumes you have ruby and rails installed and bundler if not just google an installation as it is very easy to download a package that gets you all of the components you need quickly)
 To log in as an administrator click login and type in
 
 username: alex
